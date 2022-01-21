@@ -83,6 +83,9 @@ app.use((req, res, next) => {
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
 
 //routes
+app.use('/', (req, res) => {
+  res.send("Welcome to my capstone project api app")
+})
 app.use('/register', require('./routes/register'))
 app.use('/auth', require('./routes/auth'))
 app.use('/refresh', require('./routes/refresh'))
