@@ -99,6 +99,8 @@ router.route('/:id')
  *       404:
  *         description: The post was not found
  */
+router.use(verifyJWT)
+router.route('/:id')
  .delete(verifyRoles(ROLES_LIST.Admin), postsController.deletePost)
  /**
  * @swagger
