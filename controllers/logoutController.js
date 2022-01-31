@@ -3,7 +3,7 @@ const User = require('../models/User')
 const handleLogout =  async (req, res) => {
 
     const cookies = req.cookies;
-    if(!cookies?.jwt) return res.status(204).json({"success": "successfully logged out"})
+    if(!cookies?.jwt) return res.status(204).json({"status":"success", "message":"successfully logged out"})
 
     const refreshToken = cookies.jwt
 
@@ -11,7 +11,7 @@ const handleLogout =  async (req, res) => {
 
     if(!foundUser){
         res.clearCookie('jwt', { httpOnly: true})
-        return res.status(204).json({"success": "successfully logged out"})
+        return res.status(204).json({"status":"success", "message": "successfully logged out"})
     }
    
     //delete refresh token
@@ -19,7 +19,7 @@ const handleLogout =  async (req, res) => {
     const result = await foundUser.save()
     
     res.clearCookie('jwt', { httpOnly: true})
-    res.status(204).json({'message': 'Successfully logged out!'})   
+    res.status(204).json({"status":"success", "message":"successfully logged out"})   
      
 }
 

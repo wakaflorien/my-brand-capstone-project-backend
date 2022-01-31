@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const logoutController = require('../controllers/logoutController');
-
+const verifyJWT = require('../middleware/verifyJWT')
 /**
  * @swagger
  * components:
@@ -35,10 +35,13 @@ const logoutController = require('../controllers/logoutController');
  *    - "application/json"
  *    - "application/xml"
  *    responses:
+ *      '401':
+ *        description:Unauthorized
  *      '204':
- *        description: Successfully logged out
+ *        description: No content
  *        content: []
  */
+router.use(verifyJWT)
 router.get('/', logoutController.handleLogout)
     
 module.exports = router;

@@ -41,13 +41,13 @@ const verifyJWT = require('../middleware/verifyJWT')
  *         description: access token
  *    responses:
  *      '200':
- *        description: Generated refresh token
+ *        description: OK
  *      '403':
- *        description: Forbidden!
+ *        description: Forbidden
  *      '401':
  *        description: Unauthorized
 */
-// router.use(verifyJWT)
+router.use(verifyJWT)
 router.get('/', refreshController.handleRefreshToken)
     
 module.exports = router;

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon index",
-    "test": "mocha"
+    "test": "mocha --timeout 10000000000"
   },
   "keywords": [
     "example",
@@ -29,8 +29,6 @@
     "mongoose": "^6.1.6",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
-    "should": "^13.2.3",
-    "supertest": "^6.2.2",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0"
   },

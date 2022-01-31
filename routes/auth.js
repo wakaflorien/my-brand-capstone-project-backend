@@ -15,6 +15,9 @@ const verifyJWT = require('../middleware/verifyJWT')
  *       properties:
  *         email:
  *           type: string
+ *       required:
+ *         - email
+ *         - password
  *           description: Email of the user 
  *         password:
  *           type: string
@@ -41,11 +44,11 @@ const verifyJWT = require('../middleware/verifyJWT')
  *            $ref: '#/components/schemas/User'
  *    responses:
  *      '200':
- *        description: Login Success!, Token generation
+ *        description: login Success
  *      '400':
- *        description: Username and password are required!
- *      '401':
- *        description: Unauthorized
+ *        description: username and password are required
+ *      '404':
+ *        description: user not found
  */
 router.post('/', authController.handleLogin)
 /**
@@ -62,15 +65,15 @@ router.post('/', authController.handleLogin)
  *            $ref: '#/components/schemas/User'
  *    responses:
  *      200:
- *        description: The User was updated
+ *        description: User updated
  *        content:
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/User'
  *      404:
- *        description: The User was not found
+ *        description: user not found
  *      500:
- *        description: Some error happened
+ *        description: Internal server error
  */
 router.use(verifyJWT)
 router.put('/user', updateController.handleUpdateUser)

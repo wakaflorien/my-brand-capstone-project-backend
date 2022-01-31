@@ -4,26 +4,7 @@ const postsController = require('../../controllers/postsController');
 const ROLES_LIST = require('../../config/roles_list')
 const verifyRoles = require('../../middleware/verifyRoles')
 const verifyJWT = require('../../middleware/verifyJWT')
-
-const multer = require('multer')
-// upload file path
-const FILE_PATH = 'uploads';
-
-// configure multer
-const upload = multer({
-    dest: `${FILE_PATH}/`,
-    limits: {
-        files: 5, // allow up to 5 files per request,
-        fieldSize: 5 * 1024 * 1024 // 2 MB (max file size)
-    },
-    fileFilter: (req, file, cb) => {
-        // allow images only
-        if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-            return cb(new Error('Only image are allowed.'), false);
-        }
-        cb(null, true);
-    }
-});
+const multerConfig = require('../../config/uploadImage')
 
 
 /**
@@ -96,7 +77,6 @@ router.route('/')
  *         description: The post was not found
  */
 
- router.use(verifyJWT)
 router.route('/:id')
     .get(postsController.getPost)
 /**
@@ -176,6 +156,6 @@ router.route('/')
  *       500:
  *         description: Internal server error
 */
-.post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.User),postsController.createNewPost) //upload.single('blogImage'),
+.post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.User), postsController.createNewPost) 
 
 module.exports = router;

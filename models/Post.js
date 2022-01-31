@@ -6,7 +6,15 @@ const postsSchema = new Schema({
         type: String,
         required: true
     }, 
+    subTitle:  {
+        type: String,
+        required: true
+    },  
     postBody: {
+        type: String,
+        required: true
+    }, 
+    imageUrl: {
         type: String,
         required: true
     },
