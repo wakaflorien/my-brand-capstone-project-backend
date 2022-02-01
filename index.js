@@ -57,12 +57,10 @@ app.use(express.urlencoded({ extended: false }));
 // built-in middleware for json  
 app.use(express.json());
 
-// enable CORS
-app.use(cors({
-  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
-}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+// enable CORS
+app.use(cors());
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
 
