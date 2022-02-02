@@ -38,7 +38,7 @@ const deletePost = async (req, res) => {
     if(!req?.params?.id) return res.status(400).json({"status":"fail", "error":"parameter id required"})
     const post = await Post.findOne({_id: req.params.id}).exec()
 
-    if (!post) return res.status(400).json({ "status":"fail", "error":`post ${req.params.id} not found` })
+    if (!post) return res.status(404).json({ "status":"fail", "error":`post ${req.params.id} not found` })
 
     const result = await post.deleteOne({_id: req.params.id})
     res.status(200).json({"status":"success", "message":"post deleted"})
@@ -50,7 +50,7 @@ const getPost = async (req,res) => {
     const post = await Post.findOne({_id: req.params.id}).exec()
 
     if (!post) {
-        return res.status(400).json({ "status":"fail", "error":`post ${req.params.id} not found` })
+        return res.status(404).json({ "status":"fail", "error":`post ${req.params.id} not found` })
     }
     res.status(200).json({"status":"success", "message":"retrieved post", "data":{"post": post}})
 }

@@ -5,12 +5,16 @@ const mongoose = require('mongoose')
 const connectDB = require('./config/dbConn')
 const PORT = process.env.PORT || 3500
 const cors = require('cors')
+const corsOptions = require('./config/corsOptions')
 const bodyParser = require('body-parser')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 
 const swaggerUI = require('swagger-ui-express')
 const swaggerJsDoc = require('swagger-jsdoc')
+
+//connect to databse
+connectDB();
 
 const options = {
     definition: {
@@ -47,8 +51,8 @@ const options = {
   
   const specs = swaggerJsDoc(options);
 
-//connect to databse
-connectDB();
+// enable CORS
+app.use(cors(corsOptions))
 
 // middleware for cookies
 app.use(cookieParser())
@@ -59,8 +63,6 @@ app.use(express.json());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-// enable CORS
-app.use(cors());
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
 
