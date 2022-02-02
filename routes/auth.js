@@ -15,9 +15,6 @@ const verifyJWT = require('../middleware/verifyJWT')
  *       properties:
  *         email:
  *           type: string
- *       required:
- *         - email
- *         - password
  *           description: Email of the user 
  *         password:
  *           type: string
@@ -79,3 +76,4 @@ router.use(verifyJWT)
 router.put('/user', updateController.handleUpdateUser)
     
 module.exports = router;
+
