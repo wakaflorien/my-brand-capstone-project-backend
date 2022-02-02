@@ -14,7 +14,8 @@ const addComment = async (req, res) => {
         //create and store the new comment
         const results = await Comment.create({
             message: req.body.message,
-            commentator: req.body.commentator
+            commentator: req.body.commentator,
+            postId: req.body.postId
         })
         res.status(201).json(results)
     } catch (err) {
