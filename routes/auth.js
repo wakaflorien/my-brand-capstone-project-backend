@@ -76,4 +76,3 @@ router.use(verifyJWT)
 router.put('/user', updateController.handleUpdateUser)
     
 module.exports = router;
-
